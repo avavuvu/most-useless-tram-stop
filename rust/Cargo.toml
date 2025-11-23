@@ -1,0 +1,15 @@
+[package]
+name = "rust"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.100"
+crossterm = "0.29.0"
+csv = "1.4.0"
+geoutils = "0.5.1"
+ordered-float = "5.1.0"
+ratatui = "0.29.0"
+regex = "1.12.2"
+serde = { version = "1.0.228", features = ["serde_derive"] }
+slug = "0.1.6"

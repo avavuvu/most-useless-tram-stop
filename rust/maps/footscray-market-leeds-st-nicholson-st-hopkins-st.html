@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <style>body { margin: 0; } #map { height: 100vh; }</style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script>
+        const map = L.map('map');
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        
+        L.marker([-37.80008059, 144.90105834]).addTo(map).bindPopup('Footscray Market/Leeds St');
+        L.marker([-37.79984074, 144.89973634]).addTo(map).bindPopup('Nicholson St/Hopkins St');
+        L.polyline([[-37.80008059, 144.90105834], [-37.79984074, 144.89973634]], {color: 'red'}).addTo(map);
+        
+        map.fitBounds([[-37.80008059, 144.90105834], [-37.79984074, 144.89973634]]);
+
+        map.setZoom(30);
+
+    </script>
+</body>
+</html>
