@@ -6,18 +6,16 @@ use ordered_float::OrderedFloat;
 
 use crate::DistanceRecord;
 
-pub fn write_csv(saved_distances: &HashMap<usize, DistanceRecord>) -> Result<()> {
+pub fn write_csv(saved_distances: Vec<DistanceRecord>) -> Result<()> {
     let mut wtr = WriterBuilder::new()
         .has_headers(true)
         .from_path("output.csv")?;
-
-    let mut values: Vec<&DistanceRecord> = saved_distances
-        .values()
-        .collect();
+    
+    let mut values = saved_distances.clone().into_iter().collect::<Vec<DistanceRecord>>();
 
     values.sort_by_key(|r| OrderedFloat(r.length));
 
-    for record in  values {
+    for record in values {
         wtr.serialize(record)?;
     }
 

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <style>body { margin: 0; } #map { height: 100vh; }</style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script>
+        const map = L.map('map');
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        
+        L.marker([-37.85841261, 144.99723374]).addTo(map).bindPopup('The Avenue/Dandenong Rd');
+        L.marker([-37.85827918, 144.99574837]).addTo(map).bindPopup('Hornby St/Dandenong Rd');
+        L.polyline([[-37.85841261, 144.99723374], [-37.85827918, 144.99574837]], {color: 'red'}).addTo(map);
+        
+        map.fitBounds([[-37.85841261, 144.99723374], [-37.85827918, 144.99574837]]);
+
+        map.setZoom(30);
+
+    </script>
+</body>
+</html>

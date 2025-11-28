@@ -1,17 +1,9 @@
 use std::{collections::{BinaryHeap}};
 use anyhow::Result;
-use ordered_float::OrderedFloat;
 use std::cmp::Reverse;
 
 
-use crate::{Stop, haversine::haversine_distance};
-
-#[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
-struct Distance {
-    pub length: OrderedFloat<f64>,
-    pub a: usize,
-    pub b: usize,
-}
+use crate::{Distance, Stop, haversine::haversine_distance};
 
 pub fn bruteforce<F>(stops: &Vec<Stop>, mut progress_callback: F) -> Result<Vec<(f64, Stop, Stop)>> 
 where 
@@ -61,7 +53,7 @@ where
         .into_sorted_vec()
         .into_iter()
         .rev()
-        .take(40)
+        .take(200)
         .map(|Reverse(distance)| {
             (
                 distance.length.into_inner(), 

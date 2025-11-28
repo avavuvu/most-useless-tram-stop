@@ -26,6 +26,12 @@ pub struct App {
     exit: bool,
 }
 
+enum Save {
+    All,
+    None,
+    Selected
+}
+
 impl App {
     pub fn run(mut self, terminal: &mut DefaultTerminal) -> io::Result<()> {
         while !self.exit {
@@ -37,19 +43,44 @@ impl App {
         Ok(())
     }
 
-    fn exit(&mut self, save: bool) {
+    fn exit(&mut self, save: Save) {
         self.exit = true;
 
-        if save {
-            write_csv::write_csv(&self.saved_distances).unwrap();
+        match save {
+            Save::All => {
+                if let Some(result) = &self.result {
+                    if let Ok(result) = result {
+                        let mapped = result.into_iter().map(|(distance, stop_a, stop_b)|DistanceRecord {
+                            length: *distance,
+                            stop_a_name: stop_a.name.clone(),
+                            stop_a_lat: stop_a.lat,
+                            stop_a_long: stop_a.long,
+                            stop_b_name: stop_b.name.clone(),
+                            stop_b_lat: stop_b.lat,
+                            stop_b_long: stop_b.long,
+                        }).collect::<Vec<DistanceRecord>>();
+    
+                        write_csv::write_csv(mapped).unwrap()
+                    }
+
+                }
+
+            }
+            Save::None => {},
+            Save::Selected => {
+                let values:  Vec<DistanceRecord> = self.saved_distances.values().cloned().collect();
+
+                write_csv::write_csv(values).unwrap()
+            }
         }
+
         
     }
 
     fn handle_key_event(&mut self, key_event: KeyEvent) {
         match key_event.code {
-            KeyCode::Char('q') | KeyCode::Esc => self.exit(true),
-            KeyCode::Char('x') => self.exit(false),
+            KeyCode::Char('q') | KeyCode::Esc => self.exit(Save::Selected),
+            KeyCode::Char('x') => self.exit(Save::None),
             KeyCode::Char('h') | KeyCode::Left => self.select_none(),
             KeyCode::Char('j') | KeyCode::Down => self.select_next(),
             KeyCode::Char('k') | KeyCode::Up => self.select_previous(),
@@ -57,6 +88,7 @@ impl App {
             KeyCode::Char('G') | KeyCode::End => self.select_last(),
             KeyCode::Enter => self.visualize(),
             KeyCode::Char(' ') => self.save(),
+            KeyCode::Char('a') => self.exit(Save::All),
             _ => {}
         }
     }
@@ -168,11 +200,11 @@ impl App {
                             format!("{}. ", i + 1).into(),
                             format!("{:.2}m\n", distance_in_meters).yellow().into(),
                         ]),
-                        format!("{} #{}", stop_a.name, stop_a.stop_number).into(),
+                        format!("{} #{:?}", stop_a.name, stop_a.stop_number).into(),
                         format!("\t\tat {},{}", stop_a.lat, stop_a.long)
                             .dark_gray()
                             .into(),
-                        format!("{} #{}", stop_b.name, stop_b.stop_number).into(),
+                        format!("{} #{:?}", stop_b.name, stop_b.stop_number).into(),
                         format!("\t\tat {},{}", stop_b.lat, stop_b.long)
                             .dark_gray()
                             .into(),
@@ -206,7 +238,8 @@ impl Widget for &mut App {
     fn render(self, area: ratatui::prelude::Rect, buf: &mut ratatui::prelude::Buffer) {
         let instructions = Line::from(vec![
             " Save and Quit ".into(), "<Q> ".blue().bold(),
-            " Quit without Saving ".into(), "<X> ".blue().bold()
+            " Quit without Saving ".into(), "<X> ".blue().bold(),
+            " Save All and Quit ".into(), "<A> ".blue().bold(),
         
         ]);
 

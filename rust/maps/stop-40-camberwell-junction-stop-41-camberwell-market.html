@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <style>body { margin: 0; } #map { height: 100vh; }</style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script>
+        const map = L.map('map');
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        
+        L.marker([-37.8313239, 145.0564329]).addTo(map).bindPopup('Stop 40: Camberwell Junction');
+        L.marker([-37.8314426, 145.0575166]).addTo(map).bindPopup('Stop 41: Camberwell Market');
+        L.polyline([[-37.8313239, 145.0564329], [-37.8314426, 145.0575166]], {color: 'red'}).addTo(map);
+        
+        map.fitBounds([[-37.8313239, 145.0564329], [-37.8314426, 145.0575166]]);
+
+        map.setZoom(30);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <style>body { margin: 0; } #map { height: 100vh; }</style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script>
+        const map = L.map('map');
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        
+        L.marker([-37.8069028, 145.030464]).addTo(map).bindPopup('Stop 33: Kew Shopping Centre');
+        L.marker([-37.806934, 145.0316135]).addTo(map).bindPopup('Stop 34: High Street');
+        L.polyline([[-37.8069028, 145.030464], [-37.806934, 145.0316135]], {color: 'red'}).addTo(map);
+        
+        map.fitBounds([[-37.8069028, 145.030464], [-37.806934, 145.0316135]]);
+
+        map.setZoom(30);
+
+    </script>
+</body>
+</html>
