@@ -46,7 +46,7 @@ def calculate_heading(lat_a, long_a, lat_b, long_b):
 def generate_image(lat_a, long_a, lat_b, long_b, name):
     heading = calculate_heading(lat_b, long_b, lat_a, long_a)
 
-    src = f"https://maps.googleapis.com/maps/api/streetview?size=640x480&location={lat_b},{long_b}&fov=80&heading={-heading}&pitch=0&key=AIzaSyDigsVF0LJ1KgZtWCirzoUKZSEAbXW_B3E"
+    src = f"https://maps.googleapis.com/maps/api/streetview?size=640x480&location={lat_b},{long_b}&fov=80&heading={-heading}&pitch=0&key={APIKEY}"
     
     response = requests.get(src)
 
@@ -63,7 +63,7 @@ def generate_image(lat_a, long_a, lat_b, long_b, name):
         return None
 
 
-def csv_to_md(images=True, take=15):
+def csv_to_md(images=False, take=15):
     df = pd.read_csv("../data/output.csv")
 
     df["merged_name"] = df.apply(merge_names, axis=1)

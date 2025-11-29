@@ -11,7 +11,6 @@ pub mod visualize;
 pub mod write_csv;
 pub mod bruteforce_v2;
 
-
 #[derive(Debug)]
 #[derive(Clone)]
 pub struct Stop {
@@ -19,7 +18,8 @@ pub struct Stop {
     lat: f64,
     name: String,
     stop_number: i32,
-    route_name: Option<String>
+    route_name: Option<String>,
+    stop_modifier: Option<String>
 }
 
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
@@ -42,7 +42,7 @@ pub struct DistanceRecord {
 }
 
 type RecordGov = (String, String, i32);
-type RecordOSM = (String, String, String, i32); //geometry.coordinates	route_name	properties.name	stop_number
+type RecordOSM = (String, String, String, i32, String); //geometry.coordinates	route_name	properties.name	stop_number stop_modifier
 
 fn split_coords_string(coords: &str) -> Result<(f64, f64)> {
     let split = coords
@@ -67,6 +67,12 @@ fn load_osm_data() -> Result<Vec<Stop>> {
             let record: RecordOSM = result?;
 
             let (long, lat) = split_coords_string(&record.0)?;
+
+            let modifier = if record.4.is_empty() {
+                None
+            } else {
+                Some(record.4)
+            };
             
             Ok(Stop {
                 long,
@@ -74,6 +80,7 @@ fn load_osm_data() -> Result<Vec<Stop>> {
                 route_name: Some(record.1),
                 stop_number: record.3,
                 name: record.2,
+                stop_modifier: modifier,
                 
             })
         }).collect::<Result<Vec<Stop>>>()?;
@@ -100,20 +107,23 @@ fn load_gov_data() -> Result<Vec<Stop>> {
                 lat,
                 name: record.1,
                 stop_number: record.2,
-                route_name: None
+                route_name: None,
+                stop_modifier: None,
             })
         }).collect::<Result<Vec<Stop>>>()?;
 
     Ok(coords_list)
 }
 
-fn main() -> io::Result<()> {
-    let stops = load_osm_data().unwrap();
-    let closest = bruteforce_v2(&stops);
-    
+fn main() -> io::Result<()> {    
     let mut terminal = ratatui::init();
     let mut app = app::App::default();
 
+    // OSM data (better)
+    let stops = load_osm_data().unwrap();
+    let closest = bruteforce_v2(&stops);
+
+    // Government data (worse)
     // let stops = load_gov_data().unwrap();
     // let closest = bruteforce(&stops, |progress| app.progress = progress);
 
@@ -123,4 +133,5 @@ fn main() -> io::Result<()> {
     ratatui::restore();
 
     app_result
+ 
 }

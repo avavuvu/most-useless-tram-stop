@@ -19,6 +19,17 @@
 ---
 
 - 2\. {% .rank %}
+- **Hawthorn Road** to **Dandenong Road**
+- 72.09m
+- [Google Maps](https://www.google.com/maps?q=-37.8658912,145.0267879)
+
+---
+
+- {% street-view lat="-37.8658912" long="145.0267879" name="hawthorn-road-to-dandenong-road" /%} {% colspan=4 %} 
+
+---
+
+- 3\. {% .rank %}
 - **Caulfield Station** to **Dandenong Road**
 - 77.49m
 - [Google Maps](https://www.google.com/maps?q=-37.8763788,145.0417745)
@@ -29,7 +40,7 @@
 
 ---
 
-- 3\. {% .rank %}
+- 4\. {% .rank %}
 - **McNamara Street** to **Regent Street**
 - 91.44m
 - [Google Maps](https://www.google.com/maps?q=-37.7300439,144.9914079)
@@ -40,7 +51,7 @@
 
 ---
 
-- 4\. {% .rank %}
+- 5\. {% .rank %}
 - **Camberwell Junction** to **Camberwell Market**
 - 96.09m
 - [Google Maps](https://www.google.com/maps?q=-37.8313239,145.0564329)
@@ -51,7 +62,7 @@
 
 ---
 
-- 5\. {% .rank %}
+- 6\. {% .rank %}
 - **Brighton Road** to **St Kilda Town Hall**
 - 99.92m
 - [Google Maps](https://www.google.com/maps?q=-37.8680403,144.9877154)
@@ -62,7 +73,7 @@
 
 ---
 
-- 6\. {% .rank %}
+- 7\. {% .rank %}
 - **Kew Shopping Centre** to **High Street**
 - 101.05m
 - [Google Maps](https://www.google.com/maps?q=-37.8069028,145.030464)
@@ -73,7 +84,7 @@
 
 ---
 
-- 7\. {% .rank %}
+- 8\. {% .rank %}
 - **St Kilda Station** to **Canterbury Road**
 - 103.78m
 - [Google Maps](https://www.google.com/maps?q=-37.8590039,144.9772792)
@@ -84,7 +95,7 @@
 
 ---
 
-- 8\. {% .rank %}
+- 9\. {% .rank %}
 - **Kooyong Tennis Centre** to **Kooyong Station**
 - 110.22m
 - [Google Maps](https://www.google.com/maps?q=-37.8383462,145.0325333)
@@ -95,7 +106,7 @@
 
 ---
 
-- 9\. {% .rank %}
+- 10\. {% .rank %}
 - **North Melbourne Town Hall** to **Curzon Street**
 - 111.86m
 - [Google Maps](https://www.google.com/maps?q=-37.8032545,144.9495557)
@@ -106,7 +117,7 @@
 
 ---
 
-- 10\. {% .rank %}
+- 11\. {% .rank %}
 - **Glenhuntly Shops** to **Glen Huntly Station**
 - 115.24m
 - [Google Maps](https://www.google.com/maps?q=-37.8892595,145.0407593)
@@ -117,7 +128,7 @@
 
 ---
 
-- 11\. {% .rank %}
+- 12\. {% .rank %}
 - **Berkeley Street** to **Kooyongkoot Road**
 - 116.44m
 - [Google Maps](https://www.google.com/maps?q=-37.8291113,145.0373164)
@@ -128,7 +139,7 @@
 
 ---
 
-- 12\. {% .rank %}
+- 13\. {% .rank %}
 - **Malvern Station** to **Hawthorn Road**
 - 117.66m
 - [Google Maps](https://www.google.com/maps?q=-37.8652468,145.0278511)
@@ -139,7 +150,7 @@
 
 ---
 
-- 13\. {% .rank %}
+- 14\. {% .rank %}
 - **Footscray Market** to **Footscray Station**
 - 120.17m
 - [Google Maps](https://www.google.com/maps?q=-37.8001007,144.9011424)
@@ -150,7 +161,7 @@
 
 ---
 
-- 14\. {% .rank %}
+- 15\. {% .rank %}
 - **Footscray Market** to **Nicholson Street**
 - 122.80m
 - [Google Maps](https://www.google.com/maps?q=-37.8001007,144.9011424)
@@ -158,17 +169,6 @@
 ---
 
 - {% street-view lat="-37.8001007" long="144.9011424" name="footscray-market-to-nicholson-street" /%} {% colspan=4 %} 
-
----
-
-- 15\. {% .rank %}
-- **Chapel Street** to **Brunning Street**
-- 126.31m
-- [Google Maps](https://www.google.com/maps?q=-37.8717598,144.9894484)
-
----
-
-- {% street-view lat="-37.8717598" long="144.9894484" name="chapel-street-to-brunning-street" /%} {% colspan=4 %} 
 
 ---
 {% /table %}

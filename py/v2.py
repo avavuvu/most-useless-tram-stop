@@ -30,6 +30,14 @@ def find_stop_number(name: str):
     
     return match[0]
 
+def find_stop_modifier(name: str):
+    match = re.findall(r"(?<=Stop )\d+A", name)
+
+    if len(match) == 0:
+        return None
+
+    return match[0]
+
 def _export_to_geojson(df: pd.DataFrame):
     df["type"] = "Point"
     # df = df[df["name"].isin(["Tram 70: Waterfront City => Wattle Park","Tram 70: Wattle Park => Waterfront City"])]
@@ -51,10 +59,11 @@ def main():
     exploded["geometry.coordinates"] = exploded["geometry.coordinates"].apply(clean_coords)
 
     exploded['stop_number'] = exploded['properties.name'].apply(find_stop_number)
+    exploded['stop_modifier'] = exploded['properties.name'].apply(find_stop_modifier)
 
     exploded["name"] = exploded["properties.name"].apply(lambda a: re.sub(r"Stop \d*D*A*: ", "", a))
 
-    out = exploded[["geometry.coordinates", "route_name", "name", "stop_number"]]
+    out = exploded[["geometry.coordinates", "route_name", "name", "stop_number", "stop_modifier"]]
 
     out.to_csv("../data/osm_tram_stops.tsv", "\t", index=False)
     

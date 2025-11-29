@@ -38,7 +38,8 @@ pub fn bruteforce_v2(stops: &Vec<Stop>) -> Result<Vec<(f64, Stop, Stop)>> {
 
                 let stop_difference = i_stop.stop_number - j_stop.stop_number;
 
-                if stop_difference == 0 {
+                // this is just to check hawthorn road & dandenong road
+                if i_stop.stop_modifier.eq(&j_stop.stop_modifier) && stop_difference == 0  {
                     continue;
                 }
     
